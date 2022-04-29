@@ -16,7 +16,7 @@
         <activity
             android:name=".DefiCouleurActivity"
             android:label="@string/couleur_name" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ListeDefisActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

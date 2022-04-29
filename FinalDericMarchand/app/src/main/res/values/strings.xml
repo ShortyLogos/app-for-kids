@@ -2,4 +2,6 @@
     <string name="app_name">Défi 1…2…3… Go!</string>
     <string name="couleur_name">Défi des Couleurs</string>
     <string name="persos_name">Défi des Personnages Célèbres</string>
+    <string name="auteur">Réalisé par Déric Marchand</string>
+    <string name="capture_qr">Scanner un code QR</string>
 </resources>
