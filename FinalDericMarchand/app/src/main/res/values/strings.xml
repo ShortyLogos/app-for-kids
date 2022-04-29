@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">FinalDericMarchand</string>
+    <string name="app_name">Défi 1…2…3… Go!</string>
+    <string name="couleur_name">Défi des Couleurs</string>
+    <string name="persos_name">Défi des Personnages Célèbres</string>
 </resources>
