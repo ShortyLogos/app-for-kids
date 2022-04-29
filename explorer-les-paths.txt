@@ -1,0 +1,3 @@
+addArc --> méthode de Path à part moveTo et lineTo pour faire des animations d'arcs de cercle
+addCircle
+addOval

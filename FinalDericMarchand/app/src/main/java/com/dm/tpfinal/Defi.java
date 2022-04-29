@@ -1,6 +1,10 @@
 package com.dm.tpfinal;
 
-public class Defi {
+import java.io.Serializable;
+import java.util.Hashtable;
+import java.util.Vector;
+
+public class Defi implements Serializable {
     private String nom;
     private boolean reussi;
     private String description;

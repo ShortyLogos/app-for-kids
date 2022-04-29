@@ -8,21 +8,29 @@
     android:paddingBottom="15dp">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iconeDefi"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        app:srcCompat="@drawable/check" />
+        android:layout_weight="0.45"
+        app:srcCompat="@drawable/color_palette" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/nomDefi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="sans-serif-black"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="TextView"
-        android:textSize="24sp"
-        tools:text="Défi des Couleurs" />
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        tools:text="Couleurs Mêlées" />
+
+    <ImageView
+        android:id="@+id/reussi"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.45"
+        app:srcCompat="@drawable/check" />
 </LinearLayout>
