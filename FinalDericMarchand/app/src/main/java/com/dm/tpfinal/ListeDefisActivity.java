@@ -23,7 +23,6 @@ public class ListeDefisActivity extends AppCompatActivity {
     Vector<Hashtable<String, Object>> infoDefis;
     ListeDefis listeDefis;
     Button codeQR;
-    TextView testQR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,6 @@ public class ListeDefisActivity extends AppCompatActivity {
         listeDefis = ListeDefis.getInstance(this);
         infoDefis = listeDefis.getInfoDefis();
         codeQR = findViewById(R.id.codeQR);
-        testQR = findViewById(R.id.testQR);
 
         listeItemsDefis = findViewById(R.id.listeItemsDefis);
         int[] conteneurs = {R.id.iconeDefi, R.id.nomDefi, R.id.reussi};
