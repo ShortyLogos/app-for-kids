@@ -33,6 +33,7 @@ public class ListeDefisActivity extends AppCompatActivity {
         listeDefis = ListeDefis.getInstance(this);
         infoDefis = listeDefis.getInfoDefis();
         codeQR = findViewById(R.id.codeQR);
+        testQR = findViewById(R.id.testQR);
 
         listeItemsDefis = findViewById(R.id.listeItemsDefis);
         int[] conteneurs = {R.id.iconeDefi, R.id.nomDefi, R.id.reussi};
@@ -60,12 +61,14 @@ public class ListeDefisActivity extends AppCompatActivity {
         // toast a message as "cancelled"
         if (intentResult != null) {
             if (intentResult.getContents() == null) {
-                Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Annulé", Toast.LENGTH_SHORT).show();
             } else {
-                // if the intentResult is not null we'll set
-                // the content and format of scan message
-                messageText.setText(intentResult.getContents());
-                messageFormat.setText(intentResult.getFormatName());
+                if (intentResult.getContents().equals("Les couleurs")) {
+                    startActivity(new Intent(this, DefiCouleurActivity.class));
+                }
+                else if (intentResult.getContents().equals("Les personnages célèbres")) {
+                    startActivity(new Intent(this, DefiPersosActivity.class));
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
