@@ -105,10 +105,9 @@ public class DefiCouleurActivity extends AppCompatActivity {
                         nouvelleQuestion();
                         remplirCouleurs();
                     }
-                    else {
-                        zoneChevalet.setBackgroundResource(R.drawable.chevalet);
-                        couleur.setVisibility(View.VISIBLE);
-                    }
+                    zoneChevalet.setBackgroundResource(R.drawable.chevalet);
+                    couleur.setVisibility(View.VISIBLE);
+
                     break;
 
                 default:
