@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -50,6 +52,9 @@ public class ListeDefisActivity extends AppCompatActivity {
             intentIntegrator.setOrientationLocked(true);
             intentIntegrator.initiateScan();
         });
+
+        Intent i = new Intent(this, DefiCouleurActivity.class);
+        startActivity(i);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

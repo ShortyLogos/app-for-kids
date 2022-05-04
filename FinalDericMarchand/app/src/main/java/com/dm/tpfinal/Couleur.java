@@ -3,7 +3,7 @@ package com.dm.tpfinal;
 public class Couleur {
     private String nom;
 
-    public Couleur(String nom, int image) {
+    public Couleur(String nom) {
         this.nom = nom;
     }
 
@@ -11,7 +11,7 @@ public class Couleur {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public static Couleur[] couleursPrimaires() {
+        return new Couleur[]{new Couleur("Rouge"), new Couleur("Jaune"), new Couleur("Bleu")};
     }
 }

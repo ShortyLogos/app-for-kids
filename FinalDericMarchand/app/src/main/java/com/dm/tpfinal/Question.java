@@ -1,27 +1,42 @@
 package com.dm.tpfinal;
 
+import java.util.Vector;
+
 public class Question {
-    private String question;
-    private boolean completee;
+    private String titre;
+    private String formulation;
+    private String[] reponse;
+    // On utilise un tableau de Strings plutôt qu'un seul String pour la réponse
+    // au cas où plusieurs réponses seraient acceptables ou si elles sont
+    // multiples (ex : couleurs à combiner pour produire couleur x)
 
-    public Question(String question, boolean completee) {
-        this.question = question;
-        this.completee = completee;
+    public Question(String titre, String formulation, String[] reponse) {
+        this.titre = titre;
+        this.formulation = formulation;
+        this.reponse = reponse;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
-    public boolean isCompletee() {
-        return completee;
+    public String getFormulation() {
+        return formulation;
     }
 
-    public void setCompletee(boolean completee) {
-        this.completee = completee;
+    public void setFormulation(String formulation) {
+        this.formulation = formulation;
+    }
+
+    public String[] getReponse() {
+        return reponse;
+    }
+
+    public void setReponse(String[] reponse) {
+        this.reponse = reponse;
     }
 }
