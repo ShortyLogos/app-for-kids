@@ -9,12 +9,14 @@ public class Defi implements Serializable {
     private boolean reussi;
     private String description;
     private String activitePhysique;
+    private Vector<Question> questions;
 
-    public Defi(String nom, String description, boolean reussi, String activitePhysique) {
+    public Defi(String nom, String description, boolean reussi, String activitePhysique, Vector<Question> questions) {
         this.nom = nom;
         this.reussi = reussi;
         this.description = description;
         this.activitePhysique = activitePhysique;
+        this.questions = questions;
     }
 
     public String getNom() {
@@ -39,6 +41,14 @@ public class Defi implements Serializable {
 
     public void setReussi(boolean reussi) {
         this.reussi = reussi;
+    }
+
+    public Vector<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Vector<Question> questions) {
+        this.questions = questions;
     }
 
     public String getActivitePhysique() {

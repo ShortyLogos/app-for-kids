@@ -22,12 +22,24 @@
         android:textSize="20sp"
         tools:text="Quelles couleurs doit-on combiner pour faire la couleur Magenta ?" />
 
-    <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/zoneChevalet"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:srcCompat="@drawable/chevalet" />
+        android:background="@drawable/chevalet">
+
+        <LinearLayout
+            android:id="@+id/centreChevalet"
+            android:layout_width="250dp"
+            android:layout_height="155dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.311"></LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/zoneChoixCouleur"
@@ -76,7 +88,7 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:id="@+id/zoneChoisiCouleur"
+        android:id="@+id/zoneChoisieCouleur"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"
