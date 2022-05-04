@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.DragEvent;
@@ -26,6 +28,8 @@ public class DefiCouleurActivity extends AppCompatActivity {
     LinearLayout zoneChoixCouleur;
     LinearLayout zoneChoisieCouleur;
     Defi defiCouleur;
+    Ecouteur ec;
+    boolean questionCompletee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,23 +48,21 @@ public class DefiCouleurActivity extends AppCompatActivity {
                 "Faites 5 pas en arrière",
                 genererQuestions());
 
-        defiCouleur.setQuestionCourante(defiCouleur.questionAleatoire());
-        zoneQuestionCouleur.setText(defiCouleur.getQuestionCourante().getFormulation());
+        nouvelleQuestion();
+
+        ec = new Ecouteur();
 
         // On remplit la zone de couleurs possibles de CouleurView correspondant aux couleurs primaires
         remplirCouleurs();
 
-        Ecouteur ec = new Ecouteur();
-
-        // Inscription des sources (le chevalet et les couleurs) à l'écouteur
+        // Inscription du chevalet à l'écouteur
+        // Celle des objets CouleurView se fait dans la méthode remplirCouleurs()
         centreChevalet.setOnDragListener(ec);
-        for (int couleur = 0; couleur < zoneChoixCouleur.getChildCount(); couleur++) {
-            zoneChoixCouleur.getChildAt(couleur).setOnTouchListener(ec);
-        }
     }
 
     private class Ecouteur implements View.OnDragListener, View.OnTouchListener {
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onDrag(View source, DragEvent dragEvent) {
             CouleurView couleur = (CouleurView)dragEvent.getLocalState(); // la couleur
@@ -79,14 +81,34 @@ public class DefiCouleurActivity extends AppCompatActivity {
 
                 case DragEvent.ACTION_DROP:
                     if (Arrays.asList(defiCouleur.getQuestionCourante().getReponse()).contains(couleur.getCouleur().getNom())) {
+                        couleur.setOnTouchListener(null);
                         zoneChoixCouleur.removeView(couleur);
                         zoneChoisieCouleur.addView(couleur);
+
+                        if (zoneChoisieCouleur.getChildCount() == defiCouleur.getQuestionCourante().getReponse().length) {
+                            defiCouleur.getQuestions().remove(defiCouleur.getQuestionCourante());
+                            if (defiCouleur.getQuestions().size() > 0) {
+                                questionCompletee = true;
+                            }
+                            else {
+                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
+                                finish();
+                                startActivity(i);
+                            }
+                        }
                     }
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    zoneChevalet.setBackgroundResource(R.drawable.chevalet);
-                    couleur.setVisibility(View.VISIBLE);
+                    if (questionCompletee) {
+                        questionCompletee = false;
+                        nouvelleQuestion();
+                        remplirCouleurs();
+                    }
+                    else {
+                        zoneChevalet.setBackgroundResource(R.drawable.chevalet);
+                        couleur.setVisibility(View.VISIBLE);
+                    }
                     break;
 
                 default:
@@ -96,6 +118,7 @@ public class DefiCouleurActivity extends AppCompatActivity {
             return true;
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View couleurView, MotionEvent event) {
             View.DragShadowBuilder dragshadow = new View.DragShadowBuilder(couleurView);
@@ -109,8 +132,9 @@ public class DefiCouleurActivity extends AppCompatActivity {
 
     // Redéfinition de la classe ImageView avec ajout d'un objet Couleur comme propriété
     private class CouleurView extends androidx.appcompat.widget.AppCompatImageView {
-        private Couleur couleur;
+        private final Couleur couleur;
 
+        @SuppressLint("ClickableViewAccessibility")
         public CouleurView(@NonNull Context context, Couleur couleur) {
             super(context);
             this.couleur = couleur;
@@ -149,21 +173,27 @@ public class DefiCouleurActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void remplirCouleurs() {
-        for (int i = 0; i < zoneChoixCouleur.getChildCount(); i++) {
-            zoneChoixCouleur.removeViewAt(i);
-        }
-
+        zoneChoixCouleur.removeAllViews();
+        zoneChoisieCouleur.removeAllViews();
         for (Couleur c : Couleur.couleursPrimaires()) {
-            zoneChoixCouleur.addView(new CouleurView(DefiCouleurActivity.this, c));
+            CouleurView couleurView = new CouleurView(DefiCouleurActivity.this, c);
+            couleurView.setOnTouchListener(ec);
+            zoneChoixCouleur.addView(couleurView);
         }
+    }
+
+    private void nouvelleQuestion() {
+        defiCouleur.setQuestionCourante(defiCouleur.questionAleatoire());
+        zoneQuestionCouleur.setText(defiCouleur.getQuestionCourante().getFormulation());
     }
 
     private Vector<Question> genererQuestions() {
         Vector<Question> questions = new Vector<>();
         questions.add(new Question("Vert", "Quelle combinaison de couleurs permet d'obtenir du vert ?", new String[]{"Bleu", "Jaune"}));
-        questions.add(new Question("Orange", "Quelle combinaison de couleurs permet d'obtenir du vert ?", new String[]{"Rouge", "Jaune"}));
-        questions.add(new Question("Violet", "Quelle combinaison de couleurs permet d'obtenir du vert ?", new String[]{"Bleu", "Rouge"}));
+        questions.add(new Question("Orange", "Quelle combinaison de couleurs permet d'obtenir du orange ?", new String[]{"Rouge", "Jaune"}));
+        questions.add(new Question("Violet", "Quelle combinaison de couleurs permet d'obtenir du violet ?", new String[]{"Bleu", "Rouge"}));
         questions.add(new Question("France", "À part le blanc, quelle couleur retrouve-t-on sur le drapeau de la France ?", new String[]{"Bleu", "Rouge"}));
         questions.add(new Question("Canada", "À part le blanc, quelle couleur retrouve-t-on sur le drapeau du Canada ?", new String[]{"Rouge"}));
         questions.add(new Question("Québec", "À part le blanc, quelle couleur retrouve-t-on sur le drapeau du Québec ?", new String[]{"Bleu"}));
