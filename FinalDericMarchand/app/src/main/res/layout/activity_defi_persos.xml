@@ -1,21 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     tools:context=".DefiPersosActivity">
 
-    <TextView
-        android:id="@+id/titrePersos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Défi Personnages Célèbres"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.199" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/zonePersoQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="0.35"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textePersoQuestion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="@string/defi_persos_harry_potter" />
+
+        <TextView
+            android:id="@+id/txtTemps"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.08"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/red"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            tools:text="9" />
+
+        <ImageView
+            android:id="@+id/iconeTemps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            app:srcCompat="@drawable/hourglass" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1.25"
+        android:foreground="@drawable/frame_art">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="315dp"
+            android:layout_height="247dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/harry_potter" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnPersoChoix1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0.2"
+        android:background="@drawable/dialog_bg"
+        android:text="Button"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="Frafry Putter" />
+
+    <Button
+        android:id="@+id/btnPersoChoix2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0.2"
+        android:background="@drawable/dialog_bg"
+        android:text="Button"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="Harry Potter" />
+
+    <Button
+        android:id="@+id/btnPersoChoix3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0.2"
+        android:background="@drawable/dialog_bg"
+        android:text="Button"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="Arnold Schwarput" />
+
+    <Button
+        android:id="@+id/btnPersoChoix4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0.2"
+        android:background="@drawable/dialog_bg"
+        android:text="Button"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="Thomas Halloween" />
+</LinearLayout>

@@ -20,7 +20,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="Défi Couleurs"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         tools:text="Quelles couleurs doit-on combiner pour obtenir la couleur orange ?" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

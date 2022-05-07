@@ -53,7 +53,7 @@ public class ListeDefisActivity extends AppCompatActivity {
             intentIntegrator.initiateScan();
         });
 
-        Intent i = new Intent(this, DefiCouleurActivity.class);
+        Intent i = new Intent(this, DefiPersosActivity.class);
         startActivity(i);
     }
 

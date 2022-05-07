@@ -43,10 +43,10 @@ public class DefiCouleurActivity extends AppCompatActivity {
         zoneChoixCouleur = findViewById(R.id.zoneChoixCouleur);
         zoneChoisieCouleur = findViewById(R.id.zoneChoisieCouleur);
 
-        defiCouleur = new Defi("Couleur Mêlées",
-                "Déplace les couleurs vers le chevalet afin de répondre aux questions!",
+        defiCouleur = new Defi(getResources().getString(R.string.defi_couleurs_nom_defi),
+                getResources().getString(R.string.defi_couleurs_description),
                 false,
-                "Faites 5 pas en arrière",
+                "Faites 5 pas en arrière !",
                 genererQuestions());
 
         nouvelleQuestion();
@@ -192,15 +192,15 @@ public class DefiCouleurActivity extends AppCompatActivity {
 
     private Vector<Question> genererQuestions() {
         Vector<Question> questions = new Vector<>();
-        questions.add(new Question("Vert", "Quelle combinaison de couleurs permet d'obtenir du vert ?", new String[]{"Bleu", "Jaune"}));
-        questions.add(new Question("Orange", "Quelle combinaison de couleurs permet d'obtenir du orange ?", new String[]{"Rouge", "Jaune"}));
-        questions.add(new Question("Violet", "Quelle combinaison de couleurs permet d'obtenir du violet ?", new String[]{"Bleu", "Rouge"}));
-        questions.add(new Question("France", "À part le blanc, quelle couleur retrouve-t-on sur le drapeau de la France ?", new String[]{"Bleu", "Rouge"}));
-        questions.add(new Question("Canada", "À part le blanc, quelle couleur retrouve-t-on sur le drapeau du Canada ?", new String[]{"Rouge"}));
-        questions.add(new Question("Québec", "À part le blanc, quelle couleur retrouve-t-on sur le drapeau du Québec ?", new String[]{"Bleu"}));
-        questions.add(new Question("Ketchup", "De quelle couleur est le ketchup ?", new String[]{"Rouge"}));
-        questions.add(new Question("Moutarde", "De quelle couleur est la moutarde ?", new String[]{"Jaune"}));
-        questions.add(new Question("Bleu", "De quelle couleur est le ciel ?", new String[]{"Bleu"}));
+        questions.add(new Question("Vert", getResources().getString(R.string.defi_couleurs_vert), new String[]{"Bleu", "Jaune"}));
+        questions.add(new Question("Orange", getResources().getString(R.string.defi_couleurs_orange), new String[]{"Rouge", "Jaune"}));
+        questions.add(new Question("Violet", getResources().getString(R.string.defi_couleurs_violet), new String[]{"Bleu", "Rouge"}));
+        questions.add(new Question("France", getResources().getString(R.string.defi_couleurs_france), new String[]{"Bleu", "Rouge"}));
+        questions.add(new Question("Canada", getResources().getString(R.string.defi_couleurs_canada), new String[]{"Rouge"}));
+        questions.add(new Question("Québec", getResources().getString(R.string.defi_couleurs_quebec), new String[]{"Bleu"}));
+        questions.add(new Question("Ketchup", getResources().getString(R.string.defi_couleurs_ketchup), new String[]{"Rouge"}));
+        questions.add(new Question("Moutarde", getResources().getString(R.string.defi_couleurs_moutarde), new String[]{"Jaune"}));
+        questions.add(new Question("Bleu", getResources().getString(R.string.defi_couleurs_ciel), new String[]{"Bleu"}));
 
         return questions;
     }

@@ -1,7 +1,33 @@
 <resources>
+    <!--  Global  -->
     <string name="app_name">Défi 1…2…3… Go!</string>
     <string name="couleur_name">Couleurs Mêlées</string>
     <string name="persos_name">Devine Mon Nom</string>
     <string name="auteur">Ⓒ Réalisé par Déric Marchand</string>
     <string name="capture_qr">Scanner un code QR</string>
+
+    <!--  Activités Physiques -->
+    <string name="activite_physique_reculons">"Faites 5 pas en arrière !"</string>
+    <string name="activite_physique_course">"Faites la course jusqu’à la première station des Petits Défis 1, 2, 3 GO !"</string>
+
+    <!--  Défi Couleurs - Général -->
+    <string name="defi_couleurs_nom_defi">Couleurs Mêlées</string>
+    <string name="defi_couleurs_description">"Déplace les couleurs vers le chevalet afin de répondre aux questions!"</string>
+
+    <!--  Défi Couleurs - Questions -->
+    <string name="defi_couleurs_vert">Quelle combinaison de couleurs permet d\'obtenir du vert ?</string>
+    <string name="defi_couleurs_orange">Quelle combinaison de couleurs permet d\'obtenir du orange ?</string>
+    <string name="defi_couleurs_violet">Quelle combinaison de couleurs permet d\'obtenir du violet ?</string>
+    <string name="defi_couleurs_france">À part le blanc, quelle couleur retrouve-t-on sur le drapeau de la France ?</string>
+    <string name="defi_couleurs_canada">À part le blanc, quelle couleur retrouve-t-on sur le drapeau du Canada ?</string>
+    <string name="defi_couleurs_quebec">À part le blanc, quelle couleur retrouve-t-on sur le drapeau du Québec ?</string>
+    <string name="defi_couleurs_ketchup">De quelle couleur est le ketchup ?</string>
+    <string name="defi_couleurs_moutarde">De quelle couleur est la moutarde ?</string>
+    <string name="defi_couleurs_ciel">De quelle couleur est le ciel ?</string>
+
+    <!--  Défi Personnages Célèbres - Général  -->
+    <string name="defi_perso_titre">Qui suis-je ?</string>
+
+    <!--  Défi Personnages Célèbres - Questions -->
+    <string name="defi_persos_harry_potter">Je pratique la sorcellerie et j\'adore le Quidditch.</string>
 </resources>
