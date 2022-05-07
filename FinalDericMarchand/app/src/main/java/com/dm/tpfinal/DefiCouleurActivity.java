@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -91,9 +92,10 @@ public class DefiCouleurActivity extends AppCompatActivity {
                                 questionCompletee = true;
                             }
                             else {
-                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
-                                finish();
-                                startActivity(i);
+                                Utils.showActiviteDialog(DefiCouleurActivity.this, defiCouleur.getActivitePhysique(), R.drawable.reculons);
+//                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
+//                                finish();
+//                                startActivity(i);
                             }
                         }
                     }
