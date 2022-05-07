@@ -27,7 +27,14 @@
 
     <!--  Défi Personnages Célèbres - Général  -->
     <string name="defi_perso_titre">Qui suis-je ?</string>
+    <string name="defi_perso_description">"Identifie le ou les personnage(s) sur l'image!"</string>
 
     <!--  Défi Personnages Célèbres - Questions -->
+    <string name="defi_persos_simpsons">Nous sommes une famille loufoque et attachante.</string>
     <string name="defi_persos_harry_potter">Je pratique la sorcellerie et j\'adore le Quidditch.</string>
+    <string name="defi_persos_spider_man">Je lance des toiles d\'araignées et porte un costume.</string>
+    <string name="defi_persos_pinocchio">Je suis un pantin et mon nez allonge quand je mens.</string>
+    <string name="defi_persos_pikachu">Je suis le plus célèbre Pokémon de type Électrique.</string>
+    <string name="defi_persos_elsa">Je suis la fameuse Reine des neiges.</string>
+    <string name="defi_persos_bugs_bunny">J\'adore les carottes et je suis farceur.</string>
 </resources>

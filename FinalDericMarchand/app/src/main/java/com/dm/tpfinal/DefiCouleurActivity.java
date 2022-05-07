@@ -192,6 +192,7 @@ public class DefiCouleurActivity extends AppCompatActivity {
 
     private Vector<Question> genererQuestions() {
         Vector<Question> questions = new Vector<>();
+        Question q = null;
         questions.add(new Question("Vert", getResources().getString(R.string.defi_couleurs_vert), new String[]{"Bleu", "Jaune"}));
         questions.add(new Question("Orange", getResources().getString(R.string.defi_couleurs_orange), new String[]{"Rouge", "Jaune"}));
         questions.add(new Question("Violet", getResources().getString(R.string.defi_couleurs_violet), new String[]{"Bleu", "Rouge"}));

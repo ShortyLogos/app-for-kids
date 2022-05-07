@@ -6,6 +6,7 @@ public class Question {
     private String titre;
     private String formulation;
     private String[] reponse;
+    private String[] choixMultiples;
     // On utilise un tableau de Strings plutôt qu'un seul String pour la réponse
     // au cas où plusieurs réponses seraient acceptables ou si elles sont
     // multiples (ex : couleurs à combiner pour produire couleur x)
@@ -14,6 +15,7 @@ public class Question {
         this.titre = titre;
         this.formulation = formulation;
         this.reponse = reponse;
+        this.choixMultiples = null;
     }
 
     public String getTitre() {
@@ -38,5 +40,13 @@ public class Question {
 
     public void setReponse(String[] reponse) {
         this.reponse = reponse;
+    }
+
+    public String[] getChoixMultiples() {
+        return choixMultiples;
+    }
+
+    public void setChoixMultiples(String[] choixMultiples) {
+        this.choixMultiples = choixMultiples;
     }
 }
