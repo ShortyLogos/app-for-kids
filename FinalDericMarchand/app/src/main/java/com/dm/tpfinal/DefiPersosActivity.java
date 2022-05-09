@@ -24,7 +24,7 @@ public class DefiPersosActivity extends AppCompatActivity {
         questions.add(q1);
 
         Question q2 = new Question("Les Simpsons", getResources().getString(R.string.defi_persos_simpsons), new String[]{"Les Simpsons"});
-        q.setChoixMultiples(new String[]{"Les McDuff", "Les Grapsons", "Les Simpsons", "Les Sérieux"});
+        q2.setChoixMultiples(new String[]{"Les McDuff", "Les Grapsons", "Les Simpsons", "Les Sérieux"});
         questions.add(q2);
 
         Question q3 = new Question("Spider-Man", getResources().getString(R.string.defi_persos_spider_man), new String[]{"Spider-Man"});
