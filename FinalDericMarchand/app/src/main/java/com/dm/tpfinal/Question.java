@@ -1,12 +1,17 @@
 package com.dm.tpfinal;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Vector;
 
 public class Question {
     private String titre;
     private String formulation;
     private String[] reponse;
-    private String[] choixMultiples;
+    private Vector<String> choixMultiples;
+    private int imageAssociee;
     // On utilise un tableau de Strings plutôt qu'un seul String pour la réponse
     // au cas où plusieurs réponses seraient acceptables ou si elles sont
     // multiples (ex : couleurs à combiner pour produire couleur x)
@@ -16,6 +21,7 @@ public class Question {
         this.formulation = formulation;
         this.reponse = reponse;
         this.choixMultiples = null;
+        this.imageAssociee = 0;
     }
 
     public String getTitre() {
@@ -42,11 +48,28 @@ public class Question {
         this.reponse = reponse;
     }
 
-    public String[] getChoixMultiples() {
+    public void melangeReponse() {
+        Collections.shuffle(choixMultiples);
+    }
+
+    public Vector<String> getChoixMultiples() {
         return choixMultiples;
     }
 
-    public void setChoixMultiples(String[] choixMultiples) {
+    public void setChoixMultiples(Vector<String> choixMultiples) {
         this.choixMultiples = choixMultiples;
     }
+
+    public static Vector<String> genererChoixMultiple(String[] choixReponse) {
+        Vector<String> v = new Vector<String>();
+        for(String choix: choixReponse) {
+            v.add(choix);
+        }
+
+        return v;
+    }
+
+    public int getImageAssociee() { return imageAssociee; }
+
+    public void setImageAssociee(int adresseImage) { this.imageAssociee = adresseImage; }
 }

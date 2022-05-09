@@ -26,8 +26,8 @@
     <string name="defi_couleurs_ciel">De quelle couleur est le ciel ?</string>
 
     <!--  Défi Personnages Célèbres - Général  -->
-    <string name="defi_perso_titre">Qui suis-je ?</string>
-    <string name="defi_perso_description">"Identifie le ou les personnage(s) sur l'image!"</string>
+    <string name="defi_persos_titre">Qui suis-je ?</string>
+    <string name="defi_persos_description">"Identifie le ou les personnage(s) sur l'image!"</string>
 
     <!--  Défi Personnages Célèbres - Questions -->
     <string name="defi_persos_simpsons">Nous sommes une famille loufoque et attachante.</string>

@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Vector;
 
-public class DefiCouleurActivity extends AppCompatActivity {
+public class DefiCouleurActivity extends AppCompatActivity implements DefiActivity {
 
     ConstraintLayout zoneChevalet;
     TextView zoneQuestionCouleur;
@@ -46,7 +46,7 @@ public class DefiCouleurActivity extends AppCompatActivity {
         defiCouleur = new Defi(getResources().getString(R.string.defi_couleurs_nom_defi),
                 getResources().getString(R.string.defi_couleurs_description),
                 false,
-                "Faites 5 pas en arrière !",
+                getResources().getString(R.string.activite_physique_reculons),
                 genererQuestions());
 
         nouvelleQuestion();
@@ -185,12 +185,12 @@ public class DefiCouleurActivity extends AppCompatActivity {
         }
     }
 
-    private void nouvelleQuestion() {
+    public void nouvelleQuestion() {
         defiCouleur.setQuestionCourante(defiCouleur.questionAleatoire());
         zoneQuestionCouleur.setText(defiCouleur.getQuestionCourante().getFormulation());
     }
 
-    private Vector<Question> genererQuestions() {
+    public Vector<Question> genererQuestions() {
         Vector<Question> questions = new Vector<>();
         Question q = null;
         questions.add(new Question("Vert", getResources().getString(R.string.defi_couleurs_vert), new String[]{"Bleu", "Jaune"}));
