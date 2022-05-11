@@ -27,6 +27,7 @@
             android:background="@drawable/text_bg"
             android:padding="8dp"
             android:text="TextView"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="Présentation du défi." />

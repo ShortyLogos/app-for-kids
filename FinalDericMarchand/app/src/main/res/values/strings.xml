@@ -14,7 +14,7 @@
 
     <!--  Défi Couleurs - Général -->
     <string name="defi_couleurs_nom_defi">Couleurs Mêlées</string>
-    <string name="defi_couleurs_description">"Déplace les couleurs vers le chevalet afin de répondre aux questions!"</string>
+    <string name="defi_couleurs_description">"Déplace les bonnes couleurs vers le chevalet!"</string>
 
     <!--  Défi Couleurs - Questions -->
     <string name="defi_couleurs_vert">Quelle combinaison de couleurs permet d\'obtenir du vert ?</string>

@@ -9,7 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FFE4272B</color>
     <color name="yellow">#FFFABA14</color>
+    <color name="darkyellow">#FBE08E</color>
     <color name="blue">#FF2298D1</color>
     <color name="pale_easel">#FFEDBF8C</color>
     <color name="dark_easel">#FFbe713a</color>
+    <color name="paper">#FFF2F2F2</color>
 </resources>

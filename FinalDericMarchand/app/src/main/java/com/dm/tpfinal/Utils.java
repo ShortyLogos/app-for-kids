@@ -1,5 +1,6 @@
 package com.dm.tpfinal;
 
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.util.Vector;
+
 // Classe d'utilitaires utilisés au sein du projet
 public class Utils {
 
@@ -17,20 +20,9 @@ public class Utils {
         return (int)px;
     }
 
-    public static void showActiviteDialog(Context context, String texte, int image) {
-        Dialog dialog = new Dialog(context, R.style.DialogStyle);
-        dialog.setContentView(R.layout.activite_physique_dialog);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
-
-        TextView t = dialog.findViewById(R.id.txtActivite);
-        ImageView img = dialog.findViewById(R.id.imgActivite);
-        t.setText(texte);
-        img.setImageResource(image);
-
-        dialog.findViewById(R.id.txtContinuer).setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-
-        dialog.show();
-    }
+//    public void jouerAnimation(Vector<ObjectAnimator> suiteAnimation) {
+//        suiteAnimation.get(noAnimation).start();
+//        noAnimation++;
+//        if (noAnimation == ensembleAnimation.size()) { noAnimation = 0; };
+//    }
 }

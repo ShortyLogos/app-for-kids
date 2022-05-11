@@ -3,12 +3,14 @@ package com.dm.tpfinal;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +27,8 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
     Defi defiCouleur;
     Ecouteur ec;
     boolean questionCompletee;
+
+    Vector<ObjectAnimator> chevaletAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,14 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
         // Inscription du chevalet à l'écouteur
         // Celle des objets CouleurView se fait dans la méthode remplirCouleurs()
         centreChevalet.setOnDragListener(ec);
+
+        chevaletAnimation = new Vector<>();
+
+        chevaletAnimation.add(ObjectAnimator.ofFloat(zoneChevalet, "x", -100f).setDuration(400));
+        chevaletAnimation.add(ObjectAnimator.ofFloat(zoneChevalet, "x", 100f).setDuration(400));
+        chevaletAnimation.add(ObjectAnimator.ofFloat(zoneChevalet, "x", 0f).setDuration(400));
+        animator.setInterpolator(new BounceInterpolator());
+        animator.start();
 
         showDefiPresentation(this, defiCouleur.getDescription(), defiCouleur.getNom(), R.drawable.brush);
     }
@@ -95,6 +107,13 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                             }
                         }
                     }
+                    else {
+                        Vector chevaletAnimation = new Vector<>();
+
+                        chevaletAnimation.animation ObjectAnimator.ofFloat(zoneChevalet, "x", -100f).setDuration(1200);
+                        animator.setInterpolator(new BounceInterpolator());
+                        animator.start();
+                    }
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -103,9 +122,9 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                         nouvelleQuestion();
                         remplirCouleurs();
                     }
+
                     zoneChevalet.setBackgroundResource(R.drawable.chevalet);
                     couleur.setVisibility(View.VISIBLE);
-
                     break;
 
                 default:
