@@ -1,5 +1,6 @@
  package com.dm.tpfinal;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class DefiPersosActivity extends AppCompatActivity implements DefiActivit
                 proposeReponse(b.getText().toString());
             });
         }
+
+        showDefiPresentation(defiPersos.getDescription(), defiPersos.getNom());
     }
 
     private void proposeReponse(String reponse) {
@@ -128,5 +131,16 @@ public class DefiPersosActivity extends AppCompatActivity implements DefiActivit
         questions.add(q7);
 
         return questions;
+    }
+
+    @Override
+    public void showDefiPresentation(String texte, String titre) {
+        AlertDialog.Builder b = new AlertDialog.Builder(DefiPersosActivity.this);
+
+        b.setMessage(texte);
+        b.setTitle(titre);
+
+        AlertDialog dialog = b.create();
+        dialog.show();
     }
 }

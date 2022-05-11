@@ -9,4 +9,5 @@ public interface DefiActivity {
 
     public Vector<Question> genererQuestions();
     public void nouvelleQuestion();
+    public void showDefiPresentation(String texte, String titre);
 }

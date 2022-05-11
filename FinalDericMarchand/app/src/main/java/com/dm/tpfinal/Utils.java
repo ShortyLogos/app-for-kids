@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 // Classe d'utilitaires utilisés au sein du projet
 public class Utils {
 
@@ -15,7 +17,7 @@ public class Utils {
         return (int)px;
     }
 
-    static void showActiviteDialog(Context context, String texte, int image) {
+    public static void showActiviteDialog(Context context, String texte, int image) {
         Dialog dialog = new Dialog(context, R.style.DialogStyle);
         dialog.setContentView(R.layout.activite_physique_dialog);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);

@@ -1,6 +1,7 @@
 package com.dm.tpfinal;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -204,5 +205,16 @@ public class DefiCouleurActivity extends AppCompatActivity implements DefiActivi
         questions.add(new Question("Bleu", getResources().getString(R.string.defi_couleurs_ciel), new String[]{"Bleu"}));
 
         return questions;
+    }
+
+    @Override
+    public void showDefiPresentation(String texte, String titre) {
+        AlertDialog.Builder b = new AlertDialog.Builder(DefiCouleurActivity.this);
+
+        b.setMessage(texte);
+        b.setTitle(titre);
+
+        AlertDialog dialog = b.create();
+        dialog.show();
     }
 }
