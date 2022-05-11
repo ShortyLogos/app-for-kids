@@ -1,28 +1,21 @@
 package com.dm.tpfinal;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Vector;
 
-public class DefiCouleurActivity extends AppCompatActivity implements DefiActivity {
+public class DefiCouleurActivity extends DefiActivity implements DefiActivityInterface {
 
     ConstraintLayout zoneChevalet;
     TextView zoneQuestionCouleur;
@@ -60,6 +53,8 @@ public class DefiCouleurActivity extends AppCompatActivity implements DefiActivi
         // Inscription du chevalet à l'écouteur
         // Celle des objets CouleurView se fait dans la méthode remplirCouleurs()
         centreChevalet.setOnDragListener(ec);
+
+        showDefiPresentation(this, defiCouleur.getDescription(), defiCouleur.getNom(), R.drawable.brush);
     }
 
     private class Ecouteur implements View.OnDragListener, View.OnTouchListener {
@@ -93,7 +88,7 @@ public class DefiCouleurActivity extends AppCompatActivity implements DefiActivi
                                 questionCompletee = true;
                             }
                             else {
-                                Utils.showActiviteDialog(DefiCouleurActivity.this, defiCouleur.getActivitePhysique(), R.drawable.reculons);
+                                showActiviteDialog(DefiCouleurActivity.this, defiCouleur.getActivitePhysique(), R.drawable.reculons);
 //                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
 //                                finish();
 //                                startActivity(i);
@@ -205,16 +200,5 @@ public class DefiCouleurActivity extends AppCompatActivity implements DefiActivi
         questions.add(new Question("Bleu", getResources().getString(R.string.defi_couleurs_ciel), new String[]{"Bleu"}));
 
         return questions;
-    }
-
-    @Override
-    public void showDefiPresentation(String texte, String titre) {
-        AlertDialog.Builder b = new AlertDialog.Builder(DefiCouleurActivity.this);
-
-        b.setMessage(texte);
-        b.setTitle(titre);
-
-        AlertDialog dialog = b.create();
-        dialog.show();
     }
 }

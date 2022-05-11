@@ -10,6 +10,23 @@
     android:paddingBottom="10dp"
     tools:context=".DefiPersosActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1.25"
+        android:foreground="@drawable/frame_art">
+
+        <ImageView
+            android:id="@+id/imgEncadree"
+            android:layout_width="315dp"
+            android:layout_height="247dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/simpsons" />
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/zonePersoQuestion"
         android:layout_width="match_parent"
@@ -52,23 +69,6 @@
             app:srcCompat="@drawable/heart" />
 
     </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_weight="1.25"
-        android:foreground="@drawable/frame_art">
-
-        <ImageView
-            android:id="@+id/imgEncadree"
-            android:layout_width="315dp"
-            android:layout_height="247dp"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/simpsons" />
-    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/zoneBtnReponse"

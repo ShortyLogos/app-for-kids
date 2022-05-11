@@ -1,18 +1,21 @@
  package com.dm.tpfinal;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.Vector;
 
-public class DefiPersosActivity extends AppCompatActivity implements DefiActivity {
+public class DefiPersosActivity extends DefiActivity implements DefiActivityInterface {
 
     TextView textePersoQuestion;
     TextView nbVie;
@@ -48,7 +51,7 @@ public class DefiPersosActivity extends AppCompatActivity implements DefiActivit
             });
         }
 
-        showDefiPresentation(defiPersos.getDescription(), defiPersos.getNom());
+        showDefiPresentation(this, defiPersos.getDescription(), defiPersos.getNom(), R.drawable.boy);
     }
 
     private void proposeReponse(String reponse) {
@@ -59,7 +62,7 @@ public class DefiPersosActivity extends AppCompatActivity implements DefiActivit
                 nouvelleQuestion();
             }
             else {
-                Utils.showActiviteDialog(DefiPersosActivity.this, defiPersos.getActivitePhysique(), R.drawable.course);
+                showActiviteDialog(DefiPersosActivity.this, defiPersos.getActivitePhysique(), R.drawable.course);
 //                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
 //                                finish();
 //                                startActivity(i);
@@ -68,6 +71,10 @@ public class DefiPersosActivity extends AppCompatActivity implements DefiActivit
         else {
             vie--;
             nbVie.setText(String.valueOf(vie));
+
+            if (vie < 1) {
+                showRecommencerDefi(getResources().getString(R.string.recommencer_texte), getResources().getString(R.string.recommencer_titre));
+            }
         }
     }
 
@@ -133,12 +140,24 @@ public class DefiPersosActivity extends AppCompatActivity implements DefiActivit
         return questions;
     }
 
-    @Override
-    public void showDefiPresentation(String texte, String titre) {
-        AlertDialog.Builder b = new AlertDialog.Builder(DefiPersosActivity.this);
+    public void showRecommencerDefi(String texte, String titre) {
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
 
         b.setMessage(texte);
         b.setTitle(titre);
+
+        b.setPositiveButton(getResources().getString(R.string.recommencer_defi), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+
+                Toast.makeText(DefiPersosActivity.this,
+                        getResources().getString(R.string.encouragement), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         AlertDialog dialog = b.create();
         dialog.show();

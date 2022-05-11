@@ -6,7 +6,7 @@
         android:width="5dp"
         android:color="@color/dark_easel" />
 
-    <solid android:color="@color/pale_easel" />
+    <solid android:color="@color/dark_easel" />
 
     <corners
         android:bottomLeftRadius="10dp"

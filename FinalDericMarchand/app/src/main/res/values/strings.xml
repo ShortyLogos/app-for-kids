@@ -5,6 +5,8 @@
     <string name="persos_name">Devine Mon Nom</string>
     <string name="auteur">Ⓒ Réalisé par Déric Marchand</string>
     <string name="capture_qr">Scanner un code QR</string>
+    <string name="recommencer_defi">Recommencer</string>
+    <string name="encouragement">Bonne chance!</string>
 
     <!--  Activités Physiques -->
     <string name="activite_physique_reculons">"Faites 5 pas en arrière !"</string>
@@ -28,6 +30,8 @@
     <!--  Défi Personnages Célèbres - Général  -->
     <string name="defi_persos_titre">Qui suis-je ?</string>
     <string name="defi_persos_description">"Identifie le ou les personnage(s) sur l'image!"</string>
+    <string name="recommencer_texte">Tu as perdu toutes tes vies!</string>
+    <string name="recommencer_titre">Oh non...</string>
 
     <!--  Défi Personnages Célèbres - Questions -->
     <string name="defi_persos_simpsons">Nous sommes une famille loufoque et attachante.</string>
