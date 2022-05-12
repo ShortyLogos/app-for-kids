@@ -7,6 +7,7 @@
     <string name="capture_qr">Scanner un code QR</string>
     <string name="recommencer_defi">Recommencer</string>
     <string name="encouragement">Bonne chance!</string>
+    <string name="bonne_reponse">Bonne réponse!</string>
 
     <!--  Activités Physiques -->
     <string name="activite_physique_reculons">"Faites 5 pas en arrière !"</string>

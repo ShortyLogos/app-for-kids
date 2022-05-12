@@ -8,6 +8,8 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Vector;
@@ -90,6 +93,9 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
 
         if (questionCompletee) {
             questionCompletee = false;
+
+            toastPersonnalise(getResources().getString(R.string.bonne_reponse));
+
             nouvelleQuestion();
             remplirCouleurs();
         }
@@ -123,6 +129,7 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                         fadeOut.setDuration(500);
                         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(couleur, View.ALPHA, 1);
                         fadeIn.setDuration(500);
+
                         fadeOut.start();
 
                         new android.os.Handler().postDelayed(
@@ -137,15 +144,15 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                                                     public void run() {
                                                         verifReponse();
                                                     }
-                                                }, 500);
+                                                }, 550);
                                     }
-                                }, 500);
+                                }, 550);
                     }
                     else {
                         zoneChevalet.animate()
                                 .xBy(-100)
                                 .setInterpolator(timeInterpolator)
-                                .setDuration(500)
+                                .setDuration(550)
                                 .start();
                     }
                     break;
@@ -230,7 +237,10 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
 
     public void nouvelleQuestion() {
         defiCouleur.setQuestionCourante(defiCouleur.questionAleatoire());
+        zoneQuestionCouleur.setAlpha(0);
         zoneQuestionCouleur.setText(defiCouleur.getQuestionCourante().getFormulation());
+
+        fadeIn(zoneQuestionCouleur, 500);
     }
 
     public Vector<Question> genererQuestions() {
