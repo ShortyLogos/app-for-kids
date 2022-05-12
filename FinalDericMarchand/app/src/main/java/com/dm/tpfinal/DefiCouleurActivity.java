@@ -74,6 +74,27 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
         };
     }
 
+    private void verifReponse() {
+        if (zoneChoisieCouleur.getChildCount() == defiCouleur.getQuestionCourante().getReponse().length) {
+            defiCouleur.getQuestions().remove(defiCouleur.getQuestionCourante());
+            if (defiCouleur.getQuestions().size() > 0) {
+                questionCompletee = true;
+            }
+            else {
+                showActiviteDialog(DefiCouleurActivity.this, defiCouleur.getActivitePhysique(), R.drawable.reculons);
+//                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
+//                                finish();
+//                                startActivity(i);
+            }
+        }
+
+        if (questionCompletee) {
+            questionCompletee = false;
+            nouvelleQuestion();
+            remplirCouleurs();
+        }
+    }
+
     private class Ecouteur implements View.OnDragListener, View.OnTouchListener {
 
         @SuppressLint("ClickableViewAccessibility")
@@ -97,20 +118,28 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                     if (Arrays.asList(defiCouleur.getQuestionCourante().getReponse()).contains(couleur.getCouleur().getNom())) {
                         couleur.setOnTouchListener(null);
                         zoneChoixCouleur.removeView(couleur);
-                        zoneChoisieCouleur.addView(couleur);
+                        centreChevalet.addView(couleur);
+                        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(couleur, View.ALPHA, 0);
+                        fadeOut.setDuration(500);
+                        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(couleur, View.ALPHA, 1);
+                        fadeIn.setDuration(500);
+                        fadeOut.start();
 
-                        if (zoneChoisieCouleur.getChildCount() == defiCouleur.getQuestionCourante().getReponse().length) {
-                            defiCouleur.getQuestions().remove(defiCouleur.getQuestionCourante());
-                            if (defiCouleur.getQuestions().size() > 0) {
-                                questionCompletee = true;
-                            }
-                            else {
-                                showActiviteDialog(DefiCouleurActivity.this, defiCouleur.getActivitePhysique(), R.drawable.reculons);
-//                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
-//                                finish();
-//                                startActivity(i);
-                            }
-                        }
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        centreChevalet.removeView(couleur);
+                                        zoneChoisieCouleur.addView(couleur);
+                                        fadeIn.start();
+
+                                        new android.os.Handler().postDelayed(
+                                                new Runnable() {
+                                                    public void run() {
+                                                        verifReponse();
+                                                    }
+                                                }, 500);
+                                    }
+                                }, 500);
                     }
                     else {
                         zoneChevalet.animate()
@@ -122,12 +151,6 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if (questionCompletee) {
-                        questionCompletee = false;
-                        nouvelleQuestion();
-                        remplirCouleurs();
-                    }
-
                     zoneChevalet.setBackgroundResource(R.drawable.chevalet);
                     couleur.setVisibility(View.VISIBLE);
                     break;
