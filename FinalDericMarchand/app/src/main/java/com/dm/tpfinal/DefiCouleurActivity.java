@@ -3,7 +3,9 @@ package com.dm.tpfinal;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -25,10 +27,9 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
     LinearLayout zoneChoixCouleur;
     LinearLayout zoneChoisieCouleur;
     Defi defiCouleur;
-    Ecouteur ec;
     boolean questionCompletee;
-
-    Vector<ObjectAnimator> chevaletAnimation;
+    Ecouteur ec;
+    TimeInterpolator timeInterpolator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +59,19 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
         // Celle des objets CouleurView se fait dans la méthode remplirCouleurs()
         centreChevalet.setOnDragListener(ec);
 
-        chevaletAnimation = new Vector<>();
-
-        chevaletAnimation.add(ObjectAnimator.ofFloat(zoneChevalet, "x", -100f).setDuration(400));
-        chevaletAnimation.add(ObjectAnimator.ofFloat(zoneChevalet, "x", 100f).setDuration(400));
-        chevaletAnimation.add(ObjectAnimator.ofFloat(zoneChevalet, "x", 0f).setDuration(400));
-        animator.setInterpolator(new BounceInterpolator());
-        animator.start();
+        setAnimations();
 
         showDefiPresentation(this, defiCouleur.getDescription(), defiCouleur.getNom(), R.drawable.brush);
+    }
+
+    private void setAnimations() {
+        timeInterpolator = new TimeInterpolator() {
+            @Override
+            public float getInterpolation(float input) {
+                double raw = Math.sin(3f * input * 2 * Math.PI);
+                return (float)(raw * Math.exp(-input * 2f));
+            }
+        };
     }
 
     private class Ecouteur implements View.OnDragListener, View.OnTouchListener {
@@ -108,11 +113,11 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                         }
                     }
                     else {
-                        Vector chevaletAnimation = new Vector<>();
-
-                        chevaletAnimation.animation ObjectAnimator.ofFloat(zoneChevalet, "x", -100f).setDuration(1200);
-                        animator.setInterpolator(new BounceInterpolator());
-                        animator.start();
+                        zoneChevalet.animate()
+                                .xBy(-100)
+                                .setInterpolator(timeInterpolator)
+                                .setDuration(500)
+                                .start();
                     }
                     break;
 
