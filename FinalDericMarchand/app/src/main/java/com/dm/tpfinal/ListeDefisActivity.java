@@ -3,25 +3,32 @@ package com.dm.tpfinal;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Vector;
 
-public class ListeDefisActivity extends AppCompatActivity {
+public class ListeDefisActivity extends DefiActivity {
 
     ListView listeItemsDefis;
     Vector<Hashtable<String, Object>> infoDefis;
     ListeDefis listeDefis;
     Button codeQR;
+    ImageView logoApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,10 @@ public class ListeDefisActivity extends AppCompatActivity {
         listeDefis = ListeDefis.getInstance(this);
         infoDefis = listeDefis.getInfoDefis();
         codeQR = findViewById(R.id.codeQR);
+        logoApp = findViewById(R.id.logoApp);
+        ListView listeItemsDefis = findViewById(R.id.listeItemsDefis);
+        ImageView appareilPhoto = findViewById(R.id.appareilPhoto);
+        TextView auteur = findViewById(R.id.auteur);
 
         listeItemsDefis = findViewById(R.id.listeItemsDefis);
         int[] conteneurs = {R.id.iconeDefi, R.id.nomDefi, R.id.reussi};
@@ -50,8 +61,42 @@ public class ListeDefisActivity extends AppCompatActivity {
             intentIntegrator.initiateScan();
         });
 
-        Intent i = new Intent(this, DefiPersosActivity.class);
-        startActivity(i);
+        codeQR.setAlpha(0);
+        listeItemsDefis.setAlpha(0);
+        logoApp.setAlpha((float) 0);
+        appareilPhoto.setAlpha((float) 0);
+        auteur.setAlpha(0);
+
+        ArrayList<View> elementsFadeIn = new ArrayList<View>();
+        elementsFadeIn.add(listeItemsDefis);
+        elementsFadeIn.add(appareilPhoto);
+        elementsFadeIn.add(codeQR);
+        elementsFadeIn.add(auteur);
+        elementsFadeIn.add(logoApp);
+
+        fadeInElements(elementsFadeIn, 400, 500);
+
+//        Intent i = new Intent(this, DefiPersosActivity.class);
+//        startActivity(i);
+    }
+
+    private void fadeInElements(ArrayList<View> ensembleElement, long delai, long dureeAnimation) {
+        long temps = delai;
+
+        for (View v : ensembleElement) {
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            fadeIn(v, dureeAnimation);
+                        }
+                    }, temps);
+
+            temps += delai;
+        }
+
+        AnimatorSet rotationLogo = new AnimatorSet();
+        rotationLogo.playSequentially();
+        ObjectAnimator.ofFloat(logoApp, View.ROTATION)
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

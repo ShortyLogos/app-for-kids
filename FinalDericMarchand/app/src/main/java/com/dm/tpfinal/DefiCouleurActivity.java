@@ -15,7 +15,9 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +34,6 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
     Defi defiCouleur;
     boolean questionCompletee;
     Ecouteur ec;
-    TimeInterpolator timeInterpolator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +63,7 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
         // Celle des objets CouleurView se fait dans la méthode remplirCouleurs()
         centreChevalet.setOnDragListener(ec);
 
-        setAnimations();
-
         showDefiPresentation(this, defiCouleur.getDescription(), defiCouleur.getNom(), R.drawable.brush);
-    }
-
-    private void setAnimations() {
-        timeInterpolator = new TimeInterpolator() {
-            @Override
-            public float getInterpolation(float input) {
-                double raw = Math.sin(3f * input * 2 * Math.PI);
-                return (float)(raw * Math.exp(-input * 2f));
-            }
-        };
     }
 
     private void verifReponse() {
@@ -94,7 +83,7 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
         if (questionCompletee) {
             questionCompletee = false;
 
-            toastPersonnalise(getResources().getString(R.string.bonne_reponse));
+            toastPersonnalise(getResources().getString(R.string.bonne_reponse), false);
 
             nouvelleQuestion();
             remplirCouleurs();
@@ -125,19 +114,17 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                         couleur.setOnTouchListener(null);
                         zoneChoixCouleur.removeView(couleur);
                         centreChevalet.addView(couleur);
-                        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(couleur, View.ALPHA, 0);
-                        fadeOut.setDuration(500);
-                        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(couleur, View.ALPHA, 1);
-                        fadeIn.setDuration(500);
 
-                        fadeOut.start();
+                        fadeOut(couleur, 500);
 
+                        // Ici, on enchâsse des Handler afin de produire dans un premier temps des
+                        // animations et ensuite seulement convoquer la logique du jeu
                         new android.os.Handler().postDelayed(
                                 new Runnable() {
                                     public void run() {
                                         centreChevalet.removeView(couleur);
                                         zoneChoisieCouleur.addView(couleur);
-                                        fadeIn.start();
+                                        fadeIn(couleur, 500);
 
                                         new android.os.Handler().postDelayed(
                                                 new Runnable() {
@@ -149,9 +136,10 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                                 }, 550);
                     }
                     else {
+                        // Effet de "shake" sur le chevalet en cas de mauvaise réponse
                         zoneChevalet.animate()
                                 .xBy(-100)
-                                .setInterpolator(timeInterpolator)
+                                .setInterpolator(setTimeInterpolator()) // Interpolateur spécifique à l'effet
                                 .setDuration(550)
                                 .start();
                     }
@@ -235,6 +223,7 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
         }
     }
 
+    // Méthode abstraite de l'interface DefiActivityInterface
     public void nouvelleQuestion() {
         defiCouleur.setQuestionCourante(defiCouleur.questionAleatoire());
         zoneQuestionCouleur.setAlpha(0);
@@ -243,6 +232,7 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
         fadeIn(zoneQuestionCouleur, 500);
     }
 
+    // Méthode abstraite de l'interface DefiActivityInterface
     public Vector<Question> genererQuestions() {
         Vector<Question> questions = new Vector<>();
         Question q = null;
