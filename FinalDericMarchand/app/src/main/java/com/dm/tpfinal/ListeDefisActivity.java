@@ -8,6 +8,8 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -72,16 +74,26 @@ public class ListeDefisActivity extends DefiActivity {
         elementsFadeIn.add(appareilPhoto);
         elementsFadeIn.add(codeQR);
         elementsFadeIn.add(auteur);
-        elementsFadeIn.add(logoApp);
 
-        fadeInElements(elementsFadeIn, 400, 500);
+        // Animation du logo
+        fadeIn(logoApp, 1000);
+        AnimatorSet rotationLogo = new AnimatorSet();
+        rotationLogo.playSequentially(
+                ObjectAnimator.ofFloat(logoApp, View.ROTATION, 380),
+                ObjectAnimator.ofFloat(logoApp, View.ROTATION, 320),
+                ObjectAnimator.ofFloat(logoApp, View.ROTATION, 360)
+        );
+        rotationLogo.setDuration(1100);
+        rotationLogo.start();
+
+        // Fade-in du reste des éléments
+        fadeInElements(elementsFadeIn, 3000, 500, 500);
 
 //        Intent i = new Intent(this, DefiPersosActivity.class);
 //        startActivity(i);
     }
 
-    private void fadeInElements(ArrayList<View> ensembleElement, long delai, long dureeAnimation) {
-        long temps = delai;
+    private void fadeInElements(ArrayList<View> ensembleElement, long delaiInitial, long delai, long dureeAnimation) {
 
         for (View v : ensembleElement) {
             new android.os.Handler().postDelayed(
@@ -89,14 +101,10 @@ public class ListeDefisActivity extends DefiActivity {
                         public void run() {
                             fadeIn(v, dureeAnimation);
                         }
-                    }, temps);
+                    }, delaiInitial);
 
-            temps += delai;
+            delaiInitial += delai;
         }
-
-        AnimatorSet rotationLogo = new AnimatorSet();
-        rotationLogo.playSequentially();
-        ObjectAnimator.ofFloat(logoApp, View.ROTATION)
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
