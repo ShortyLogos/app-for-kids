@@ -1,6 +1,12 @@
 package com.dm.tpfinal;
 
 import android.content.Context;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -22,6 +28,27 @@ public class ListeDefis implements Serializable {
         this.context = context;
         this.listeDefis = new Vector<Defi>();
         this.infoDefis = genererInfosDefis();
+    }
+
+    public void serialiserListeDefis() throws IOException {
+        ObjectOutputStream oos = null;
+
+        FileOutputStream fos = context.openFileOutput("listedefis.ser", Context.MODE_PRIVATE);
+
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(listeDefis);
+        oos.close();
+    }
+
+    public void recupererFichierSerialisation() throws Exception {
+        ObjectInputStream ois = null;
+        Vector<Defi> resultat = null;
+
+        FileInputStream fis = context.openFileInput("listedefis.ser");
+        ois = new ObjectInputStream(fis);
+        resultat = (Vector<Defi>)ois.readObject();
+        listeDefis = resultat;
+        ois.close();
     }
 
     public Vector<Defi> getListeDefis() {

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -63,6 +64,18 @@ public class ListeDefisActivity extends DefiActivity {
             intentIntegrator.initiateScan();
         });
 
+        // Lecture du fichier de sérialisation
+        try {
+            listeDefis.recupererFichierSerialisation();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            for (Defi defi: listeDefis.getListeDefis()) {
+                System.out.println("Je passe par ici");
+            }
+        }
+
+        // Début des animations d'accueil
         codeQR.setAlpha(0);
         listeItemsDefis.setAlpha(0);
         logoApp.setAlpha((float) 0);
@@ -89,8 +102,8 @@ public class ListeDefisActivity extends DefiActivity {
         // Fade-in du reste des éléments
         fadeInElements(elementsFadeIn, 3000, 500, 500);
 
-        Intent i = new Intent(this, DefiPersosActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(this, DefiPersosActivity.class);
+//        startActivity(i);
     }
 
     private void fadeInElements(ArrayList<View> ensembleElement, long delaiInitial, long delai, long dureeAnimation) {
@@ -104,6 +117,15 @@ public class ListeDefisActivity extends DefiActivity {
                     }, delaiInitial);
 
             delaiInitial += delai;
+        }
+    }
+
+    protected void onStop() {
+        super.onStop();
+        try {
+            listeDefis.serialiserListeDefis();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
