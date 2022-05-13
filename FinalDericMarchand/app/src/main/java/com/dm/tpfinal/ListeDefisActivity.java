@@ -89,8 +89,8 @@ public class ListeDefisActivity extends DefiActivity {
         // Fade-in du reste des éléments
         fadeInElements(elementsFadeIn, 3000, 500, 500);
 
-//        Intent i = new Intent(this, DefiPersosActivity.class);
-//        startActivity(i);
+        Intent i = new Intent(this, DefiPersosActivity.class);
+        startActivity(i);
     }
 
     private void fadeInElements(ArrayList<View> ensembleElement, long delaiInitial, long delai, long dureeAnimation) {
