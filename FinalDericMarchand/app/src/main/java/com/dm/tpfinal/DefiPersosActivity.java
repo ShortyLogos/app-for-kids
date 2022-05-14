@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -179,8 +180,8 @@ public class DefiPersosActivity extends DefiActivity implements DefiActivityInte
         @Override
         public void run() {
             Animation anim = new ScaleAnimation(
-                    0.9f, 1f, // Start and end values for the X axis scaling
-                    0.9f, 1f, // Start and end values for the Y axis scaling
+                    0.85f, 1f, // Start and end values for the X axis scaling
+                    0.85f, 1f, // Start and end values for the Y axis scaling
                     Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
                     Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
             anim.setFillAfter(true); // Needed to keep the result of the animation
@@ -206,7 +207,7 @@ public class DefiPersosActivity extends DefiActivity implements DefiActivityInte
         boutonsAnimation();
 
         // Animation fade-in de l'indice sous l'image, fonction héritée de la superclasse DefiActivity
-        fadeIn(textePersoQuestion, 1000);
+        fadeIn(textePersoQuestion, 1500);
     }
 
     // Fonction qui génère l'animation de l'image (effet de grossissement + rebondissement)
@@ -236,58 +237,104 @@ public class DefiPersosActivity extends DefiActivity implements DefiActivityInte
             b.setAlpha(0);
             // Selon la position du bouton, on veut qu'il arrive de la gauche ou de la droite
             if (i % 2 == 0) {
-                b.setTranslationX(1000);
+                b.setTranslationX(1200);
             }
             else {
-                b.setTranslationX(-1000);
+                b.setTranslationX(-1200);
             }
 
             ensembleAnimationsBoutons.add(ObjectAnimator.ofFloat(b, View.TRANSLATION_X, 0));
             ensembleAnimationsBoutons.add(ObjectAnimator.ofFloat(b, "alpha", 1));
         }
         animationsBoutons.playTogether(ensembleAnimationsBoutons);
-        animationsBoutons.setDuration(1000);
-        animationsBoutons.setInterpolator(new DecelerateInterpolator());
+        animationsBoutons.setDuration(1500);
+        animationsBoutons.setInterpolator(new BounceInterpolator());
 
         animationsBoutons.start();
+    }
+
+    public Dialog showRecommencerDefi(Context context, String texte, int image) {
+        Dialog dialog = new Dialog(context, R.style.DialogStyle);
+        dialog.setContentView(R.layout.defi_dialog);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
+
+        TextView t = dialog.findViewById(R.id.txtDefiPresentation);
+        ImageView img = dialog.findViewById(R.id.imgDefiPresentation);
+        t.setText(texte);
+        img.setImageResource(image);
+
+        dialog.findViewById(R.id.txtBoutonSuivant).setOnClickListener(v -> {
+            finish();
+            startActivity(new Intent(DefiPersosActivity.this, ListeDefisActivity.class));
+        });
+
+        return dialog;
     }
 
     // Méthode abstraite de l'interface DefiActivityInterface
     public Vector<Question> genererQuestions() {
         Vector<Question> questions = new Vector<>();
 
-        Question q1 = new Question("Harry Potter", getResources().getString(R.string.defi_persos_harry_potter), new String[]{"Harry Potter"});
-        q1.setChoixMultiples(Question.genererChoixMultiple(new String[] {"Frafry Putter", "Harry Potter", "Arnold Schwarput", "Thomas Halloween"}));
+        Question q1 = new Question(getResources().getString(R.string.harry_potter), getResources().getString(R.string.defi_persos_harry_potter), new String[]{getResources().getString(R.string.harry_potter)});
+        q1.setChoixMultiples(Question.genererChoixMultiple(new String[] {
+                getResources().getString(R.string.frafry_putter),
+                getResources().getString(R.string.harry_potter),
+                getResources().getString(R.string.arnold_schwarput),
+                getResources().getString(R.string.thomas_halloween)}));
         q1.setImageAssociee(R.drawable.harry_potter);
         questions.add(q1);
 
-        Question q2 = new Question("Les Simpsons", getResources().getString(R.string.defi_persos_simpsons), new String[]{"Les Simpsons"});
-        q2.setChoixMultiples(Question.genererChoixMultiple(new String[]{"Les McDuff", "Les Grapsons", "Les Simpsons", "Les Sérieux"}));
+        Question q2 = new Question(getResources().getString(R.string.les_simpsons), getResources().getString(R.string.defi_persos_simpsons), new String[]{getResources().getString(R.string.les_simpsons)});
+        q2.setChoixMultiples(Question.genererChoixMultiple(new String[]{
+                getResources().getString(R.string.les_mcduff),
+                getResources().getString(R.string.les_grapsons),
+                getResources().getString(R.string.les_simpsons),
+                getResources().getString(R.string.les_serieux)}));
         q2.setImageAssociee(R.drawable.simpsons);
         questions.add(q2);
 
-        Question q3 = new Question("Spider-Man", getResources().getString(R.string.defi_persos_spider_man), new String[]{"Spider-Man"});
-        q3.setChoixMultiples(Question.genererChoixMultiple(new String[]{"Venom", "Super-Man", "Cat-Woman", "Spider-Man"}));
+        Question q3 = new Question(getResources().getString(R.string.spider_man), getResources().getString(R.string.defi_persos_spider_man), new String[]{getResources().getString(R.string.spider_man)});
+        q3.setChoixMultiples(Question.genererChoixMultiple(new String[]{
+                getResources().getString(R.string.venom),
+                getResources().getString(R.string.super_man),
+                getResources().getString(R.string.cat_woman),
+                getResources().getString(R.string.spider_man)}));
         q3.setImageAssociee(R.drawable.spider_man);
         questions.add(q3);
 
-        Question q4 = new Question("Pinocchio", getResources().getString(R.string.defi_persos_pinocchio), new String[]{"Pinocchio"});
-        q4.setChoixMultiples(Question.genererChoixMultiple(new String[]{"Espresso", "Pinocchio", "Cappucino", "Frodon"}));
+        Question q4 = new Question(getResources().getString(R.string.pinocchio), getResources().getString(R.string.defi_persos_pinocchio), new String[]{getResources().getString(R.string.pinocchio)});
+        q4.setChoixMultiples(Question.genererChoixMultiple(new String[]{
+                getResources().getString(R.string.espresso),
+                getResources().getString(R.string.pinocchio),
+                getResources().getString(R.string.cappucino),
+                getResources().getString(R.string.frodon)}));
         q4.setImageAssociee(R.drawable.pinocchio);
         questions.add(q4);
 
-        Question q5 = new Question("Pikachu", getResources().getString(R.string.defi_persos_pikachu), new String[]{"Pikachu"});
-        q5.setChoixMultiples(Question.genererChoixMultiple(new String[]{"Bulbasaure", "Garfield", "Pikachu", "Ampoule"}));
+        Question q5 = new Question(getResources().getString(R.string.pikachu), getResources().getString(R.string.defi_persos_pikachu), new String[]{getResources().getString(R.string.pikachu)});
+        q5.setChoixMultiples(Question.genererChoixMultiple(new String[]{
+                getResources().getString(R.string.bulbasaure),
+                getResources().getString(R.string.garfield),
+                getResources().getString(R.string.pikachu),
+                getResources().getString(R.string.ampoule)}));
         q5.setImageAssociee(R.drawable.pikachu);
         questions.add(q5);
 
-        Question q6 = new Question("Elsa", getResources().getString(R.string.defi_persos_elsa), new String[]{"Elsa"});
-        q6.setChoixMultiples(Question.genererChoixMultiple(new String[]{"Arielle", "Elsa", "Doris", "Vanille"}));
+        Question q6 = new Question(getResources().getString(R.string.elsa), getResources().getString(R.string.defi_persos_elsa), new String[]{getResources().getString(R.string.elsa)});
+        q6.setChoixMultiples(Question.genererChoixMultiple(new String[]{
+                getResources().getString(R.string.arielle),
+                getResources().getString(R.string.elsa),
+                getResources().getString(R.string.doris),
+                getResources().getString(R.string.passe_partout)}));
         q6.setImageAssociee(R.drawable.elsa);
         questions.add(q6);
 
-        Question q7 = new Question("Bugs Bunny", getResources().getString(R.string.defi_persos_bugs_bunny), new String[]{"Bugs Bunny"});
-        q7.setChoixMultiples(Question.genererChoixMultiple(new String[]{"Ratatouille", "Jo Rabbit", "Bob l'Éponge", "Bugs Bunny"}));
+        Question q7 = new Question(getResources().getString(R.string.bugs_bunny), getResources().getString(R.string.defi_persos_bugs_bunny), new String[]{getResources().getString(R.string.bugs_bunny)});
+        q7.setChoixMultiples(Question.genererChoixMultiple(new String[]{
+                getResources().getString(R.string.ratatouille),
+                getResources().getString(R.string.jo_rabbit),
+                getResources().getString(R.string.bob_eponge),
+                getResources().getString(R.string.bugs_bunny)}));
         q7.setImageAssociee(R.drawable.bugs_bunny);
         questions.add(q7);
 

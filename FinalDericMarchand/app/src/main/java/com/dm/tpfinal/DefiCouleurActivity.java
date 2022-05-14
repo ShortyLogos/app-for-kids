@@ -240,16 +240,21 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
     // Méthode abstraite de l'interface DefiActivityInterface
     public Vector<Question> genererQuestions() {
         Vector<Question> questions = new Vector<>();
+
+        String rouge = getResources().getString(R.string.rouge);
+        String bleu = getResources().getString(R.string.bleu);
+        String jaune = getResources().getString(R.string.jaune);
+
         Question q = null;
-        questions.add(new Question("Vert", getResources().getString(R.string.defi_couleurs_vert), new String[]{"Bleu", "Jaune"}));
-//        questions.add(new Question("Orange", getResources().getString(R.string.defi_couleurs_orange), new String[]{"Rouge", "Jaune"}));
-//        questions.add(new Question("Violet", getResources().getString(R.string.defi_couleurs_violet), new String[]{"Bleu", "Rouge"}));
-//        questions.add(new Question("France", getResources().getString(R.string.defi_couleurs_france), new String[]{"Bleu", "Rouge"}));
-//        questions.add(new Question("Canada", getResources().getString(R.string.defi_couleurs_canada), new String[]{"Rouge"}));
-//        questions.add(new Question("Québec", getResources().getString(R.string.defi_couleurs_quebec), new String[]{"Bleu"}));
-//        questions.add(new Question("Ketchup", getResources().getString(R.string.defi_couleurs_ketchup), new String[]{"Rouge"}));
-//        questions.add(new Question("Moutarde", getResources().getString(R.string.defi_couleurs_moutarde), new String[]{"Jaune"}));
-//        questions.add(new Question("Bleu", getResources().getString(R.string.defi_couleurs_ciel), new String[]{"Bleu"}));
+        questions.add(new Question(getResources().getString(R.string.vert), getResources().getString(R.string.defi_couleurs_vert), new String[]{bleu, jaune}));
+        questions.add(new Question(getResources().getString(R.string.orange), getResources().getString(R.string.defi_couleurs_orange), new String[]{rouge, jaune}));
+        questions.add(new Question(getResources().getString(R.string.violet), getResources().getString(R.string.defi_couleurs_violet), new String[]{bleu, rouge}));
+        questions.add(new Question(getResources().getString(R.string.france), getResources().getString(R.string.defi_couleurs_france), new String[]{bleu, rouge}));
+        questions.add(new Question(getResources().getString(R.string.canada), getResources().getString(R.string.defi_couleurs_canada), new String[]{rouge}));
+        questions.add(new Question(getResources().getString(R.string.quebec), getResources().getString(R.string.defi_couleurs_quebec), new String[]{bleu}));
+        questions.add(new Question(getResources().getString(R.string.ketchup), getResources().getString(R.string.defi_couleurs_ketchup), new String[]{rouge}));
+        questions.add(new Question(getResources().getString(R.string.moutarde), getResources().getString(R.string.defi_couleurs_moutarde), new String[]{jaune}));
+        questions.add(new Question(getResources().getString(R.string.bleu), getResources().getString(R.string.defi_couleurs_ciel), new String[]{bleu}));
 
         return questions;
     }

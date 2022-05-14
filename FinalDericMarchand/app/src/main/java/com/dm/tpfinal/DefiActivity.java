@@ -59,24 +59,6 @@ public class DefiActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public Dialog showRecommencerDefi(Context context, String texte, int image) {
-        Dialog dialog = new Dialog(context, R.style.DialogStyle);
-        dialog.setContentView(R.layout.defi_dialog);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
-
-        TextView t = dialog.findViewById(R.id.txtDefiPresentation);
-        ImageView img = dialog.findViewById(R.id.imgDefiPresentation);
-        t.setText(texte);
-        img.setImageResource(image);
-
-        dialog.findViewById(R.id.txtBoutonSuivant).setOnClickListener(v -> {
-            finish();
-            startActivity(getIntent());
-        });
-
-        return dialog;
-    }
-
     // Fonctions d'animations qui seront utilisées de manière récurrente dans les deux activités
     public void fadeIn(View v, long duree) {
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(v, View.ALPHA, 1);

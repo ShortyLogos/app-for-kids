@@ -28,8 +28,21 @@
     <string name="defi_couleurs_moutarde">De quelle couleur est la moutarde ?</string>
     <string name="defi_couleurs_ciel">De quelle couleur est le ciel ?</string>
 
+    <!-- Défi Couleurs - Éléments -->
+    <string name="rouge">Rouge</string>
+    <string name="jaune">Jaune</string>
+    <string name="bleu">Bleu</string>
+    <string name="vert">Vert</string>
+    <string name="orange">Orange</string>
+    <string name="violet">Violet</string>
+    <string name="france">France</string>
+    <string name="canada">Canada</string>
+    <string name="quebec">Québec</string>
+    <string name="ketchup">Ketchup</string>
+    <string name="moutarde">Moutarde</string>
+
     <!--  Défi Personnages Célèbres - Général  -->
-    <string name="defi_persos_titre">Qui suis-je ?</string>
+    <string name="defi_persos_titre">Devine Mon Nom</string>
     <string name="defi_persos_description">"Identifie le ou les personnage(s) sur l'image !"</string>
     <string name="recommencer_texte">Oh non... Tu as perdu toutes tes vies!</string>
 
@@ -41,4 +54,40 @@
     <string name="defi_persos_pikachu">Je suis le plus célèbre Pokémon de type Électrique.</string>
     <string name="defi_persos_elsa">Je suis la fameuse Reine des neiges.</string>
     <string name="defi_persos_bugs_bunny">J\'adore les carottes et je suis farceur.</string>
+
+    <!-- Défi Personnages Célèbres - Éléments -->
+    <string name="harry_potter">Harry Potter</string>
+    <string name="frafry_putter">Frafry Putter</string>
+    <string name="arnold_schwarput">Arnold Shwarput</string>
+    <string name="thomas_halloween">Thomas Halloween</string>
+
+    <string name="les_simpsons">Les Simpsons</string>
+    <string name="les_mcduff">Les McDuff</string>
+    <string name="les_grapsons">Les Grapsons</string>
+    <string name="les_serieux">Les Sérieux</string>
+
+    <string name="spider_man">Spider-Man</string>
+    <string name="venom">Venom</string>
+    <string name="cat_woman">Cat-Woman</string>
+    <string name="super_man">Super-Man</string>
+
+    <string name="pinocchio">Pinocchio</string>
+    <string name="espresso">Espresso</string>
+    <string name="cappucino">Cappucino</string>
+    <string name="frodon">Frodon</string>
+
+    <string name="pikachu">Pikachu</string>
+    <string name="bulbasaure">Bulbasaure</string>
+    <string name="garfield">Garfield</string>
+    <string name="ampoule">Ampoule</string>
+
+    <string name="elsa">Elsa</string>
+    <string name="arielle">Arielle</string>
+    <string name="doris">Doris</string>
+    <string name="passe_partout">Passe-Partout</string>
+
+    <string name="bugs_bunny">Bugs Bunny</string>
+    <string name="ratatouille">Ratatouille</string>
+    <string name="jo_rabbit">Jo Rabbit</string>
+    <string name="bob_eponge">Bob l\'Éponge</string>
 </resources>
