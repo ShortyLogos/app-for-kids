@@ -2,6 +2,8 @@ package com.dm.tpfinal;
 
 import android.content.Context;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,7 +17,7 @@ public class ListeDefis implements Serializable {
     private Vector<Defi> listeDefis;
     private Vector<Hashtable<String, Object>> infoDefis;
     private static ListeDefis instance;
-    private Context context;
+    private transient Context context;
 
     public static ListeDefis getInstance(Context context) {
         if (instance == null) {
@@ -30,7 +32,7 @@ public class ListeDefis implements Serializable {
         this.infoDefis = genererInfosDefis();
     }
 
-    public void serialiserListeDefis() throws IOException {
+    public void serialiserListeDefis(Context context) throws IOException {
         ObjectOutputStream oos = null;
 
         FileOutputStream fos = context.openFileOutput("listedefis.ser", Context.MODE_PRIVATE);
@@ -56,7 +58,20 @@ public class ListeDefis implements Serializable {
     }
 
     public Vector<Hashtable<String, Object>> getInfoDefis() {
-        return infoDefis;
+        return genererInfosDefis();
+    }
+
+    public boolean verifierDefiExiste(Defi defi) {
+        boolean resultat = false;
+
+        for (Defi d : listeDefis) {
+            if (d.getNom().equals(defi.getNom())) {
+                resultat = true;
+                break;
+            }
+        }
+
+        return resultat;
     }
 
     private Vector<Hashtable<String, Object>> genererInfosDefis() {
@@ -64,16 +79,26 @@ public class ListeDefis implements Serializable {
 
         Hashtable<String, Object> h = new Hashtable();
         h.put("image", R.drawable.color_palette);
-        h.put("nom", context.getString(R.string.couleur_name));
-        h.put("reussi", R.drawable.cross);
+        h.put("nom", "Couleurs Mêlées");
+        h.put("reussi", setIconeReussite("Couleurs Mêlées"));
         defis.add(h);
 
         h = new Hashtable();
         h.put("image", R.drawable.boy);
-        h.put("nom", context.getString(R.string.persos_name));
-        h.put("reussi", R.drawable.cross);
+        h.put("nom", "Devine Mon Nom");
+        h.put("reussi", setIconeReussite("Devine Mon Nom"));
         defis.add(h);
 
         return defis;
+    }
+
+    private int setIconeReussite(String nomDefi) {
+        int resultat = R.drawable.cross;;
+        for (Defi defi : listeDefis) {
+            if (defi.getNom().equals(nomDefi) && defi.isReussi()) {
+                resultat = R.drawable.check;
+            }
+        }
+        return resultat;
     }
 }

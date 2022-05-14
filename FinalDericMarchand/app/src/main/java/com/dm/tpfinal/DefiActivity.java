@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.view.Gravity;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.Serializable;
 
 public class DefiActivity extends AppCompatActivity {
 
@@ -35,7 +38,7 @@ public class DefiActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void showActiviteDialog(Context context, String texte, int image) {
+    public void showActiviteDialog(Context context, String texte, int image, ListeDefis listeDefis, Class destination) {
         Dialog dialog = new Dialog(context, R.style.DialogStyle);
         dialog.setContentView(R.layout.activite_physique_dialog);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
@@ -46,6 +49,10 @@ public class DefiActivity extends AppCompatActivity {
         img.setImageResource(image);
 
         dialog.findViewById(R.id.txtBoutonSuivant).setOnClickListener(v -> {
+            Intent i = new Intent(context, destination);
+            i.putExtra("listeDefis", listeDefis);
+            startActivity(i);
+            finish();
             dialog.dismiss();
         });
 
@@ -63,7 +70,6 @@ public class DefiActivity extends AppCompatActivity {
         img.setImageResource(image);
 
         dialog.findViewById(R.id.txtBoutonSuivant).setOnClickListener(v -> {
-//            overridePendingTransition(15, 0);
             finish();
             startActivity(getIntent());
         });

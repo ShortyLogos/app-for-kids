@@ -37,6 +37,7 @@ public class DefiPersosActivity extends DefiActivity implements DefiActivityInte
     LinearLayout zoneBtnReponse;
     FrameLayout cadrePerso;
     Defi defiPersos;
+    ListeDefis listeDefis;
     int vie = 3;
     boolean questionCompletee;
     Handler handlerAnimCoeur;
@@ -60,6 +61,11 @@ public class DefiPersosActivity extends DefiActivity implements DefiActivityInte
                 false,
                 getResources().getString(R.string.activite_physique_course),
                 genererQuestions());
+
+        listeDefis = (ListeDefis)getIntent().getSerializableExtra("listeDefis");
+        if (!listeDefis.verifierDefiExiste(defiPersos)) {
+            listeDefis.getListeDefis().add(defiPersos);
+        }
 
         for (int i = 0; i < zoneBtnReponse.getChildCount(); i++) {
             Button b = (Button)zoneBtnReponse.getChildAt(i);
@@ -140,10 +146,11 @@ public class DefiPersosActivity extends DefiActivity implements DefiActivityInte
                         new Runnable() {
                             @Override
                             public void run() {
-                                showActiviteDialog(DefiPersosActivity.this, defiPersos.getActivitePhysique(), R.drawable.course);
+                                defiPersos.setReussi(true);
+                                showActiviteDialog(DefiPersosActivity.this, defiPersos.getActivitePhysique(), R.drawable.course, listeDefis, ListeDefisActivity.class);
 //                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
 //                                finish();
-//                                startActivity(i);
+//                                startActivity(i);(Context context, String texte, int image, Defi defiActuel, Class destination, int codeRetour)
                             }
                         }, 2000);
             }

@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -32,6 +33,7 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
     LinearLayout zoneChoixCouleur;
     LinearLayout zoneChoisieCouleur;
     Defi defiCouleur;
+    ListeDefis listeDefis;
     boolean questionCompletee;
     Ecouteur ec;
 
@@ -51,6 +53,11 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                 false,
                 getResources().getString(R.string.activite_physique_reculons),
                 genererQuestions());
+
+        listeDefis = (ListeDefis)getIntent().getSerializableExtra("listeDefis");
+        if (!listeDefis.verifierDefiExiste(defiCouleur)) {
+            listeDefis.getListeDefis().add(defiCouleur);
+        }
 
         nouvelleQuestion();
 
@@ -73,10 +80,8 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
                 questionCompletee = true;
             }
             else {
-                showActiviteDialog(DefiCouleurActivity.this, defiCouleur.getActivitePhysique(), R.drawable.reculons);
-//                                Intent i = new Intent(DefiCouleurActivity.this, DefiPersosActivity.class);
-//                                finish();
-//                                startActivity(i);
+                defiCouleur.setReussi(true);
+                showActiviteDialog(DefiCouleurActivity.this, defiCouleur.getActivitePhysique(), R.drawable.reculons, listeDefis, ListeDefisActivity.class);
             }
         }
 
@@ -237,14 +242,14 @@ public class DefiCouleurActivity extends DefiActivity implements DefiActivityInt
         Vector<Question> questions = new Vector<>();
         Question q = null;
         questions.add(new Question("Vert", getResources().getString(R.string.defi_couleurs_vert), new String[]{"Bleu", "Jaune"}));
-        questions.add(new Question("Orange", getResources().getString(R.string.defi_couleurs_orange), new String[]{"Rouge", "Jaune"}));
-        questions.add(new Question("Violet", getResources().getString(R.string.defi_couleurs_violet), new String[]{"Bleu", "Rouge"}));
-        questions.add(new Question("France", getResources().getString(R.string.defi_couleurs_france), new String[]{"Bleu", "Rouge"}));
-        questions.add(new Question("Canada", getResources().getString(R.string.defi_couleurs_canada), new String[]{"Rouge"}));
-        questions.add(new Question("Québec", getResources().getString(R.string.defi_couleurs_quebec), new String[]{"Bleu"}));
-        questions.add(new Question("Ketchup", getResources().getString(R.string.defi_couleurs_ketchup), new String[]{"Rouge"}));
-        questions.add(new Question("Moutarde", getResources().getString(R.string.defi_couleurs_moutarde), new String[]{"Jaune"}));
-        questions.add(new Question("Bleu", getResources().getString(R.string.defi_couleurs_ciel), new String[]{"Bleu"}));
+//        questions.add(new Question("Orange", getResources().getString(R.string.defi_couleurs_orange), new String[]{"Rouge", "Jaune"}));
+//        questions.add(new Question("Violet", getResources().getString(R.string.defi_couleurs_violet), new String[]{"Bleu", "Rouge"}));
+//        questions.add(new Question("France", getResources().getString(R.string.defi_couleurs_france), new String[]{"Bleu", "Rouge"}));
+//        questions.add(new Question("Canada", getResources().getString(R.string.defi_couleurs_canada), new String[]{"Rouge"}));
+//        questions.add(new Question("Québec", getResources().getString(R.string.defi_couleurs_quebec), new String[]{"Bleu"}));
+//        questions.add(new Question("Ketchup", getResources().getString(R.string.defi_couleurs_ketchup), new String[]{"Rouge"}));
+//        questions.add(new Question("Moutarde", getResources().getString(R.string.defi_couleurs_moutarde), new String[]{"Jaune"}));
+//        questions.add(new Question("Bleu", getResources().getString(R.string.defi_couleurs_ciel), new String[]{"Bleu"}));
 
         return questions;
     }

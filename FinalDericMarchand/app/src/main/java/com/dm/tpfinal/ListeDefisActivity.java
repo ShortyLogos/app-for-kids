@@ -7,6 +7,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
@@ -28,10 +29,10 @@ import java.util.Vector;
 public class ListeDefisActivity extends DefiActivity {
 
     ListView listeItemsDefis;
-    Vector<Hashtable<String, Object>> infoDefis;
     ListeDefis listeDefis;
     Button codeQR;
     ImageView logoApp;
+    TextView auteur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +40,33 @@ public class ListeDefisActivity extends DefiActivity {
         setContentView(R.layout.activity_main);
 
         listeDefis = ListeDefis.getInstance(this);
-        infoDefis = listeDefis.getInfoDefis();
         codeQR = findViewById(R.id.codeQR);
         logoApp = findViewById(R.id.logoApp);
         ListView listeItemsDefis = findViewById(R.id.listeItemsDefis);
         ImageView appareilPhoto = findViewById(R.id.appareilPhoto);
-        TextView auteur = findViewById(R.id.auteur);
+        auteur = findViewById(R.id.auteur);
+
+        // Lecture du fichier de sérialisation
+        try {
+            listeDefis.recupererFichierSerialisation();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            for (Defi defi: listeDefis.getListeDefis()) {
+                System.out.println(defi.getNom());
+            }
+        }
+
+        ListeDefis d = (ListeDefis)getIntent().getSerializableExtra("listeDefis");
+        if (d != null) {
+            listeDefis = d;
+        }
 
         listeItemsDefis = findViewById(R.id.listeItemsDefis);
         int[] conteneurs = {R.id.iconeDefi, R.id.nomDefi, R.id.reussi};
 
         SimpleAdapter simpleAdapter = new SimpleAdapter(this,
-                infoDefis,
+                listeDefis.getInfoDefis(),
                 R.layout.itemdefi,
                 new String[]{"image", "nom", "reussi"},
                 conteneurs);
@@ -63,17 +79,6 @@ public class ListeDefisActivity extends DefiActivity {
             intentIntegrator.setOrientationLocked(true);
             intentIntegrator.initiateScan();
         });
-
-        // Lecture du fichier de sérialisation
-        try {
-            listeDefis.recupererFichierSerialisation();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            for (Defi defi: listeDefis.getListeDefis()) {
-                System.out.println("Je passe par ici");
-            }
-        }
 
         // Début des animations d'accueil
         codeQR.setAlpha(0);
@@ -101,9 +106,6 @@ public class ListeDefisActivity extends DefiActivity {
 
         // Fade-in du reste des éléments
         fadeInElements(elementsFadeIn, 3000, 500, 500);
-
-//        Intent i = new Intent(this, DefiPersosActivity.class);
-//        startActivity(i);
     }
 
     private void fadeInElements(ArrayList<View> ensembleElement, long delaiInitial, long delai, long dureeAnimation) {
@@ -123,7 +125,7 @@ public class ListeDefisActivity extends DefiActivity {
     protected void onStop() {
         super.onStop();
         try {
-            listeDefis.serialiserListeDefis();
+            listeDefis.serialiserListeDefis(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,10 +141,16 @@ public class ListeDefisActivity extends DefiActivity {
                 Toast.makeText(getBaseContext(), "Annulé", Toast.LENGTH_SHORT).show();
             } else {
                 if (intentResult.getContents().equals("Les couleurs")) {
-                    startActivity(new Intent(this, DefiCouleurActivity.class));
+                    Intent i = new Intent(this, DefiCouleurActivity.class);
+                    i.putExtra("listeDefis", listeDefis);
+                    startActivity(i);
+                    finish();
                 }
                 else if (intentResult.getContents().equals("Les personnages célèbres")) {
-                    startActivity(new Intent(this, DefiPersosActivity.class));
+                    Intent i = new Intent(this, DefiPersosActivity.class);
+                    i.putExtra("listeDefis", listeDefis);
+                    startActivity(i);
+                    finish();
                 }
             }
         } else {

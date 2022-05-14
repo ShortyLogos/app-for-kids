@@ -1,5 +1,7 @@
 package com.dm.tpfinal;
 
+import java.io.Serializable;
+
 public class Couleur {
     private String nom;
 

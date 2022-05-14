@@ -1,12 +1,13 @@
 package com.dm.tpfinal;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-public class Question {
+public class Question implements Serializable {
     private String titre;
     private String formulation;
     private String[] reponse;
